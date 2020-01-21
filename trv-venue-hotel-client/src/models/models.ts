@@ -14,6 +14,14 @@ export interface IStateContext {
     pets: boolean;
 };
 
+export interface IStateHotelContext {
+    hotels:any[];
+    loading:boolean;
+    type: string;
+    capacity: number;
+    price: number;
+};
+
 export interface RoomObject {
     name: string;
     slug: string;
@@ -38,4 +46,15 @@ export interface RoomsObject {
     getRoom: (slug: string) => any;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => any;
     handleChecked: (event: any) => any;
+}
+
+export interface HotelsObject {
+        
+        hotels:any[];
+        loading:boolean;
+        type: string;
+        capacity: number;
+        price: number;
+        getHotel: (slug: string) => any;
+        handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => any;
 }

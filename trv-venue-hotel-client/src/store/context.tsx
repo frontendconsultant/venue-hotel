@@ -4,6 +4,7 @@ import items from './data';
 
 const RoomContext = React.createContext<RoomsObject | null>(null);
 
+
 class RoomProvider extends Component<{}, IStateContext> {
 
     public readonly state: Readonly<IStateContext> = {
@@ -25,6 +26,7 @@ class RoomProvider extends Component<{}, IStateContext> {
     // Get Data when component mount
     public componentDidMount() {
         let rooms = this.formatData(items);
+        console.log("items");
         console.log(items);
         let featuredRooms = rooms.filter((room: any) => room.featured === true);
         let maxPrice = Math.max(...rooms.map((item: any) => item.price));
@@ -132,6 +134,7 @@ class RoomProvider extends Component<{}, IStateContext> {
 
 const RoomConsumer = RoomContext.Consumer;
 
+
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // For Using Context with Functional Component (Stateless) with HOC
@@ -140,6 +143,7 @@ export const withRoomConsumer = <P extends {}>(Component: React.ComponentClass<P
             { value => <Component {...props} context={value} />}
         </RoomConsumer>;
 };
+
 
 // Exporting all contexts
 export {RoomProvider, RoomConsumer, RoomContext};
