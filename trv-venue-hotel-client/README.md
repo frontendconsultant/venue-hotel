@@ -1,5 +1,4 @@
-## Hotel Booking App
-https://shubhamd99.github.io/react-hotel-booking-app/
+## AV Hotel Booking App
 
 Hotel Booking App build with React JS with Context for state management and typescript for static type checking
 
