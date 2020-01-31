@@ -1,6 +1,6 @@
 import React from 'react';
 import RoomsFilter from '../components/RoomsFilter';
-import RoomsList from '../components/RoomsList';
+import HotelsList from '../components/HotelList';
 import { withHotelConsumer } from '../store/hotelContext';
 import Loading from '../components/Loading';
 import { HotelsObject } from '../models/models';
@@ -12,15 +12,16 @@ interface IPropsHotelsContainer {
 // Use Context in functional component with HOC
 const HotelsContainer: React.FC<IPropsHotelsContainer> = ({context}) => {
 
-    const {loading, hotels} = context;
     console.log("context", context);
+    const {loading, hotels} = context;
+    
 
     if (loading) {
         return <Loading />
     }
     return (
         <React.Fragment>
-            <RoomsList rooms={hotels}/> 
+            <HotelsList hotels={hotels}/> 
         </React.Fragment>
     );
 }

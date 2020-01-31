@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import defaultImg from "../assets/images/room-1.jpeg";
 import Banner from '../components/Banner';
 import { Link } from 'react-router-dom';
-import { RoomContext } from '../store/context';
+import { HotelContext } from '../store/hotelContext';
 import StyledCover from '../components/StyledCover';
 
 interface IPropsSingleRoom {
@@ -21,16 +21,16 @@ export default class SingleRoom extends Component<IPropsSingleRoom, IStateSingle
         super(props)
     
         this.state = {
-            slug: this.props.match.params.slug,
+            slug: this.props.match.params.roomId,
             defaultbcg: defaultImg
         }
     }
 
     // Providing Context
-    static contextType = RoomContext;
+    static contextType = HotelContext;
     
     public render() {
-        // console.log("props", this.props);
+         console.log("props", this.context);
         const { getRoom } = this.context;
         const room: any = getRoom(this.state.slug);
 
@@ -38,7 +38,7 @@ export default class SingleRoom extends Component<IPropsSingleRoom, IStateSingle
             return (
                 <div className="error">
                     <h3>no such room could be found...</h3>
-                    <Link to="/rooms" className="btn-primary">back to rooms</Link>
+                    <Link to={`/hotel/${this.state.slug}`} className="btn-primary">back to rooms</Link>
                 </div>
             );
         }

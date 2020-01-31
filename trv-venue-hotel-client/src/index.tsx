@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RoomProvider } from './store/context';
+import { HotelProvider } from './store/hotelContext';
 import { HashRouter as Router } from 'react-router-dom';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-<RoomProvider>
+<HotelProvider>
     <Router>
         <App />
     </Router>
-</RoomProvider>, 
+</HotelProvider>, 
 document.getElementById('root'));
 
 serviceWorker.unregister();

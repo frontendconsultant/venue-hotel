@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { IStateHotelContext, HotelsObject } from '../models/models';
 import items from './hotel';
-import hotel from './hotel';
 
 
 const HotelContext = React.createContext<HotelsObject | null>(null);
@@ -19,11 +18,8 @@ class HotelProvider extends Component<{}, IStateHotelContext> {
     // Get Data when component mount
     public componentDidMount() {
         let hotels = this.formatData(items);
-        console.log("items");
-        console.log(items);
-        let featuredRooms = hotels.filter((room: any) => room.featured === true);
-        let maxPrice = Math.max(...hotels.map((item: any) => item.price));
-        let maxSize = Math.max(...hotels.map((item: any) => item.size));
+        console.log("hotels-----");
+        console.log(hotels);
 
         this.setState({
             hotels,
@@ -36,29 +32,38 @@ class HotelProvider extends Component<{}, IStateHotelContext> {
     }
 
     public render() {
+        console.log(this.props.children)
         return (
-            <HotelContext.Provider value={{...this.state, getHotel: this.getHotel, handleChange: this.handleChange, }}>
+            <HotelContext.Provider value={{...this.state, getHotelRooms: this.getHotelRooms, getRoom: this.getRoom, handleChange: this.handleChange, }}>
                 {this.props.children}
             </HotelContext.Provider>
         )
     }
+    private getRoom = (slug: string) => {
+        const tempRooms = this.formatData(items);
+        const room = tempRooms.find((room: any) => room.slug === slug);
+        return room;
+    }
 
     private formatData = (items: any) => {
         const tempItems = items.map((item: any) => {
-            let id = item.sys.id
-            let images = item.fields.images.map((image: any) => image.fields.file.url)
-            const room = {...item.fields, images, id} // Reformating the array
+            let id = item.Hotels.hotelId
+           // let images = item.hotels.images.map((image: any) => image.fields.file.url)
+            const room = {...item.Hotels,  id} // Reformating the array
             return room;
         })
 
         return tempItems;
     }
 
-    private getHotel = (slug: string) => {
-        const tempRooms = [...this.state.hotels];
-        const room = tempRooms.find((room: any) => room.slug === slug);
-        return room;
+    private getHotelRooms = (hotelId: string) => {
+        
+        const tempRooms = this.formatData(items);//[...this.state.hotels];
+        const room = tempRooms.find((room: any) => room.hotelId === hotelId);
+        const hotelRooms = room.rooms;
+        return hotelRooms;
     }
+    
 
     private handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const value = event.target.value;
@@ -113,15 +118,19 @@ class HotelProvider extends Component<{}, IStateHotelContext> {
 
 const HotelConsumer = HotelContext.Consumer;
 
+
 //type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // For Using Context with Functional Component (Stateless) with HOC
 
 
 export const withHotelConsumer = <P extends {}>(Component: React.ComponentClass<P> | React.StatelessComponent<P>): React.FC<any> => props => {
+   
     return <HotelConsumer>
             { value => <Component {...props} context={value} />}
+           
         </HotelConsumer>;
+       
 };
 
 // Exporting all contexts

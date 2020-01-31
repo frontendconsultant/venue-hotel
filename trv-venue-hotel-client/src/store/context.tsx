@@ -133,7 +133,7 @@ class RoomProvider extends Component<{}, IStateContext> {
 }
 
 const RoomConsumer = RoomContext.Consumer;
-
+console.log(RoomContext,'RoomContext')
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 

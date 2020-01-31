@@ -24,7 +24,14 @@ export interface IStateHotelContext {
 
 export interface RoomObject {
     name: string;
+    roomId: string;
+    images: string[];
+    price: number;
+}
+export interface HotelObject {
+    name: string;
     slug: string;
+    hotelId: string;
     images: string[];
     price: number;
 }
@@ -55,6 +62,7 @@ export interface HotelsObject {
         type: string;
         capacity: number;
         price: number;
-        getHotel: (slug: string) => any;
+        getHotelRooms: (slug: string) => any;
+        getRoom:(slug: string) => any,
         handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => any;
 }
