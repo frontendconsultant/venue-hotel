@@ -31,14 +31,15 @@ export default class SingleRoom extends Component<IPropsSingleRoom, IStateSingle
     
     public render() {
          console.log("props", this.context);
+        const getSelectedHotelId:any = localStorage.getItem('selectedhotelId'); 
         const { getRoom } = this.context;
         const room: any = getRoom(this.state.slug);
-
+       // const {name, description, capacity, size, price, extras, breakfast, pets, images} = room;
         if (!room) {
             return (
                 <div className="error">
                     <h3>no such room could be found...</h3>
-                    <Link to={`/hotel/${this.state.slug}`} className="btn-primary">back to rooms</Link>
+                    <Link to={`/hotel/${getSelectedHotelId}`} className="btn-primary">back to rooms</Link>
                 </div>
             );
         }
@@ -49,13 +50,14 @@ export default class SingleRoom extends Component<IPropsSingleRoom, IStateSingle
             <React.Fragment>
                <StyledCover img={mainImg || this.state.defaultbcg}>
                    <Banner title={`${name} room`} >
-                       <Link to="/rooms" className="btn-primary">back to rooms</Link>
+                       <Link to={`/hotel/${getSelectedHotelId}`} className="btn-primary">back to rooms</Link>
                    </Banner>
                </StyledCover>
                <section className="single-room">
                    <div className="single-room-images">
-                       {defaultImg.map((item: string, index: number) => {
-                          return <img key={index} src={item} alt={name} />
+                       {defaultImg.map((item: any, index: number) => {
+                           console.log(item)
+                          return <img key={index} src={item.url} alt={name} />
                        })}
                    </div>
                    <div className="single-room-info">

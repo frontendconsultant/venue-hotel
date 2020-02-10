@@ -32,17 +32,21 @@ class HotelProvider extends Component<{}, IStateHotelContext> {
     }
 
     public render() {
-        console.log(this.props.children)
         return (
-            <HotelContext.Provider value={{...this.state, getHotelRooms: this.getHotelRooms, getRoom: this.getRoom, handleChange: this.handleChange, }}>
+            <HotelContext.Provider value={{...this.state, getHotelRooms: this.getHotelRooms, getRoom: this.getRoom, handleChange: this.handleChange }}>
                 {this.props.children}
             </HotelContext.Provider>
         )
     }
-    private getRoom = (slug: string) => {
+    private getRoom = (roomId: string) => {
         const tempRooms = this.formatData(items);
-        const room = tempRooms.find((room: any) => room.slug === slug);
-        return room;
+        const getSelectedHotelId:any = localStorage.getItem('selectedhotelId');
+        const getHotelItems = this.getHotelRooms(getSelectedHotelId); 
+        
+        const room = getHotelItems.find((room: any) => room.room.roomId === roomId);
+        console.log(room)
+        console.log(roomId)
+        return room.room;
     }
 
     private formatData = (items: any) => {

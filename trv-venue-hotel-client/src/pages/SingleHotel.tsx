@@ -33,6 +33,8 @@ export default class SingleHotel extends Component<IPropsSingleHotel, IStateSing
     public render() {
         const { getHotelRooms } = this.context;
         const hotel:any[] = getHotelRooms(this.state.hotelId);
+        const keyItem:string = 'selectedhotelId';
+        localStorage.setItem(keyItem, this.state.hotelId)
         console.log(hotel,'------hotel')
 
         if (!hotel) {
