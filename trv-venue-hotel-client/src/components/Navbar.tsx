@@ -16,6 +16,7 @@ export default class Navbar extends Component<{}, IStateNavbar> {
 
     public render() {
         const { isOpen } = this.state;
+        const getSelectedHotelId:any = localStorage.getItem('selectedhotelId'); 
         return (
             <nav className="navbar">
                 <div className="nav-center">
@@ -29,7 +30,7 @@ export default class Navbar extends Component<{}, IStateNavbar> {
                     </div>
                     <ul className={isOpen ? "nav-links show-nav" : "nav-links"}>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/rooms">Rooms</Link></li>
+                        <li><Link to={`/rooms/${getSelectedHotelId}`}>Rooms</Link></li>
                     </ul>
                 </div>
             </nav>

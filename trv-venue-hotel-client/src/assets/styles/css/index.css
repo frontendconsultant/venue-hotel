@@ -196,7 +196,7 @@ h6 {
   .banner {
     padding: 2rem 6rem; }
   .banner h1 {
-    font-size: 4rem; } }
+    font-size: 2rem; } }
 
 /* End of Banner */
 /* Title */
@@ -249,7 +249,7 @@ h6 {
 
 @media screen and (min-width: 992px) {
   .services-center {
-    width: 95vw;
+    width: 800px;
     max-width: 1170px; } }
 
 @media screen and (min-width: 1200px) {
@@ -430,7 +430,7 @@ h6 {
 
 @media screen and (min-width: 992px) {
   .roomslist-center {
-    width: 95vw;
+    width: 800px;
     max-width: 1170px; } }
 
 /* end of roomlist */

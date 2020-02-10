@@ -25,7 +25,8 @@ export interface IStateHotelContext {
 export interface RoomObject {
     name: string;
     roomId: string;
-    images: string[];
+    img:string,
+    images: any[];
     price: number;
 }
 export interface HotelObject {
